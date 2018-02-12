@@ -30,6 +30,9 @@ public class GameController : MonoBehaviour
 
             .Add(new AddViewSystem(contexts))
             .Add(new SetPositionSystem(contexts))
+            .Add(new InputSystem(contexts))
+            .Add(new ChangePoitionSystem(contexts))
+            .Add(new DestroyedSystem(contexts))
             ;
     }
 }

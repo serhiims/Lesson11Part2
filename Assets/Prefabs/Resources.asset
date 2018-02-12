@@ -11,11 +11,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b20d2e4ab6a8f343b14b2142b5883eb, type: 3}
   m_Name: Resources
   m_EditorClassIdentifier: 
-  playerPrefabResourceName: 
+  width: 10
+  height: 10
+  spacing: 1
+  piecePrefabResourceName: Piece
+  blockerPrefabResourceName: PieceBlocker
   startingPosition: {x: 0, y: 0}
-  startingRotation: 0
+  blockerProbability: 0.1
   maxSpeed: 0
-  throttleSpeed: 3
-  slowdownSpeed: 2
-  rotateSpeed: 3
   moveSpeed: 0.05
