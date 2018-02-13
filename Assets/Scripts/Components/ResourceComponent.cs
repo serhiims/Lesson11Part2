@@ -3,5 +3,5 @@
 [Game]
 public class ResourceComponent : IComponent
 {
-    public string value;
+	public string value;
 }

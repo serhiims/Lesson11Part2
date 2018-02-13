@@ -5,30 +5,29 @@ using UnityEngine;
 
 public class AddViewSystem : ReactiveSystem<GameEntity>
 {
-    private Contexts _contexts;
+	private Contexts _contexts;
 
-    public AddViewSystem(Contexts contexts) : base(contexts.game)
-    {
-        _contexts = contexts;
-    }
+	public AddViewSystem (Contexts contexts) : base (contexts.game)
+	{
+		_contexts = contexts;
+	}
 
-    protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
-    {
-        return context.CreateCollector(GameMatcher.Resource.Added());
-    }
+	protected override ICollector<GameEntity> GetTrigger (IContext<GameEntity> context)
+	{
+		return context.CreateCollector (GameMatcher.Resource.Added ());
+	}
 
-    protected override bool Filter(GameEntity entity)
-    {
-        return entity.hasResource && !entity.hasView;
-    }
+	protected override bool Filter (GameEntity entity)
+	{
+		return entity.hasResource && !entity.hasView;
+	}
 
-    protected override void Execute(List<GameEntity> entities)
-    {
-        foreach (var entity in entities)
-        {
-            var view = Object.Instantiate(Resources.Load<GameObject>(entity.resource.value));
-            entity.AddView(view);
-            view.Link(entity, _contexts.game);
-        }
-    }
+	protected override void Execute (List<GameEntity> entities)
+	{
+		foreach (var entity in entities) {
+			var view = Object.Instantiate (Resources.Load<GameObject> (entity.resource.value));
+			entity.AddView (view);
+			view.Link (entity, _contexts.game);
+		}
+	}
 }

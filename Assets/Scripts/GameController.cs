@@ -8,8 +8,7 @@ public class GameController : MonoBehaviour
     private Contexts _contexts;
     private Systems _systems;
 
-    private void Start()
-    {
+    private void Start()    {
         _contexts = new Contexts();
         _systems = CreateSystems(_contexts);
 
@@ -18,16 +17,13 @@ public class GameController : MonoBehaviour
         _systems.Initialize();
     }
 
-    private void Update()
-    {
+    private void Update()    {
         _systems.Execute();
     }
 
-    private Systems CreateSystems(Contexts contexts)
-    {
+    private Systems CreateSystems(Contexts contexts)    {
         return new Feature("Game")
             .Add(new InitializePlayerSystem(contexts))
-
             .Add(new AddViewSystem(contexts))
             .Add(new SetPositionSystem(contexts))
             .Add(new InputSystem(contexts))
