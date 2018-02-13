@@ -13,6 +13,5 @@ public class Settings : ScriptableObject
 	public string blockerPrefabResourceName;
 	public Vector2 startingPosition;
 	public float blockerProbability = 0.1f;
-	public float maxSpeed;
 	public float moveSpeed = 0.05f;
 }

@@ -35,11 +35,10 @@ public class SetPositionSystem : ReactiveSystem<GameEntity>
 			var posX = settings.startingPosition.x + entity.index.i * settings.spacing + _positionOffset.x;
 			var posY = settings.startingPosition.y + entity.index.j * settings.spacing + _positionOffset.y;
 
-			if (entity.index.j == settings.height - 1) {
+			if (entity.index.j == settings.height - 1 || !entity.hasPosition) {
 				transform.position = new Vector2 (posX, posY + settings.spacing);
 			}
-			//transform.position = new Vector2 (posX, posY);
-			entity.view.value.gameObject.transform.DOMove (new Vector3 (posX ,posY, 0f), 0.3f);
+			entity.view.value.gameObject.transform.DOMove (new Vector3 (posX ,posY, 0f), settings.moveSpeed);
 			entity.ReplacePosition (posX, posY);
 		}
 	}
