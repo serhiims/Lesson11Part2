@@ -25,12 +25,9 @@ public class InitializePlayerSystem : IInitializeSystem
                 {
                     entity.AddBlocker(isBlocker);
                 }
-                entity.AddPosition(i, j);
+				entity.AddIndex(i, j);
           
             }
-        }
-        
-
-       
+        }       
     }
 }

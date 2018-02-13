@@ -10,18 +10,20 @@ public static class GameComponentsLookup {
 
     public const int Blocker = 0;
     public const int Destroyed = 1;
-    public const int Moved = 2;
-    public const int Player = 3;
-    public const int Position = 4;
-    public const int Resource = 5;
-    public const int Settings = 6;
-    public const int View = 7;
+    public const int Index = 2;
+    public const int Moved = 3;
+    public const int Player = 4;
+    public const int Position = 5;
+    public const int Resource = 6;
+    public const int Settings = 7;
+    public const int View = 8;
 
-    public const int TotalComponents = 8;
+    public const int TotalComponents = 9;
 
     public static readonly string[] componentNames = {
         "Blocker",
         "Destroyed",
+        "Index",
         "Moved",
         "Player",
         "Position",
@@ -33,6 +35,7 @@ public static class GameComponentsLookup {
     public static readonly System.Type[] componentTypes = {
         typeof(BlockerComponent),
         typeof(DestroyedComponent),
+        typeof(IndexComponent),
         typeof(MovedComponent),
         typeof(PlayerComponent),
         typeof(PositionComponent),

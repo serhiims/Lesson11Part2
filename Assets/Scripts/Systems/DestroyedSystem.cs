@@ -25,11 +25,12 @@ public class DestroyedSystem : ReactiveSystem<GameEntity>
         
         foreach (var entity in entities)
         {
-            if (entity.hasDestroyed && entity.destroyed.value)
+			if (entity.hasView && entity.hasPosition && entity.hasDestroyed && entity.destroyed.value )
             {
-                DestroyView(entity.view);
-                Debug.Log(entities.Remove(entity));
-                break;
+				entity.RemovePosition ();
+				if (entity.hasView) {
+					DestroyView (entity.view);
+				}
             }
         }
     }
@@ -45,11 +46,13 @@ public class DestroyedSystem : ReactiveSystem<GameEntity>
         {
             collinder2D.enabled = false;
         }
-        view.value.gameObject.transform
-                 .DOScale(Vector3.one * 1.5f, 0.5f)
-                 .OnComplete(() => {
-                     view.value.gameObject.Unlink();
-                     Object.Destroy(view.value.gameObject);
-                 });
-    }
+		view.value.gameObject.Unlink();
+		Object.Destroy(view.value.gameObject);
+//        view.value.gameObject.transform
+//                 .DOScale(Vector3.one * 1.5f, 0.5f)
+//                 .OnComplete(() => {
+//                     view.value.gameObject.Unlink();
+//                     Object.Destroy(view.value.gameObject);
+//                 });    
+	}
 }

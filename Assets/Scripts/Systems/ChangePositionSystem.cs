@@ -14,67 +14,52 @@ public class ChangePoitionSystem : ReactiveSystem<GameEntity>
 
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
     {
-        return context.CreateCollector(GameMatcher.Destroyed);
+		return context.CreateCollector(GameMatcher.Destroyed);
     }
 
     protected override bool Filter(GameEntity entity)
     {
-        return entity.hasDestroyed;
+		return entity.hasView && entity.hasIndex;
     }
 
     protected override void Execute(List<GameEntity> entities)
-    {
-        GameEntity targetEntity = null;
-        foreach (var entity in entities)
-        {
-            if (entity.hasDestroyed && entity.destroyed.value)
-            {
-                targetEntity = entity;
-                break;
-            }
-        }
-        if (targetEntity == null)
+    {       
+		if (entities.Count == 0 && !entities [0].hasPosition)
         {
             return;
         }
-        float column = targetEntity.position.x;
-        float row = targetEntity.position.y;
+		int column = entities [0].index.i;
+		int row = entities [0].index.j;
         var settings = _contexts.game.settings.value;
 
         var topPieces = new List<GameEntity>(settings.width);
-        for (int i = 0; i < entities.Count; i++)
+		var allEntities = _contexts.game.GetEntities ();
+		foreach (var localPiece in allEntities)
         {
-            var localPiece = entities[i];
-
-            if (localPiece.position.x == column && localPiece.position.y > row)
-            {
-                topPieces.Add(localPiece);
-            }
+			if (localPiece.hasView && localPiece.hasIndex && !localPiece.hasDestroyed) {
+				if (localPiece.index.i == column && localPiece.index.j > row) {
+					topPieces.Add (localPiece);
+				}
+			}
         }
 
         bool needPieceCreate = true;
         foreach (var localPiece in topPieces)
         {
-            if (localPiece.hasBlocker)
+            if (localPiece.hasBlocker && localPiece.blocker.value)
             {
                 needPieceCreate = false;
                 break;
             }
-            localPiece.AddPosition(localPiece.position.x, localPiece.position.y - 1);            
+			localPiece.ReplaceIndex(localPiece.index.i, localPiece.index.j - 1);            
         }
 
         if (needPieceCreate)
         {
             var entity = _contexts.game.CreateEntity();
-            bool isBlocker = Random.value < settings.blockerProbability;
-            string prefabResourceName = isBlocker ? settings.blockerPrefabResourceName : settings.piecePrefabResourceName + Random.Range(1, 7);
-            entity.AddResource(prefabResourceName);
-            if (isBlocker)
-            {
-                entity.AddBlocker(isBlocker);
-            }
-            entity.AddPosition(column, settings.height - 1);
-            entity.AddMoved(true);
+            string prefabResourceName = settings.piecePrefabResourceName + Random.Range(1, 7);
+            entity.AddResource(prefabResourceName);           
+			entity.AddIndex(column, settings.height - 1);
         }
     }
 }

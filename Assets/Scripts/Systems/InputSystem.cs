@@ -29,9 +29,9 @@ public class InputSystem : IExecuteSystem
                     Collider2D c2d = entity.view.value.GetComponent<Collider2D>();
                     if (c2d != null && c2d.bounds.Contains(new Vector3(mousePos.x, mousePos.y, 0)))
                     {
-                        entity.AddDestroyed(true);
-                    }
-                       
+						entity.ReplaceDestroyed(true);
+						break;
+                    }                       
                 }
             }
         }		
