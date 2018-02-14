@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8b20d2e4ab6a8f343b14b2142b5883eb, type: 3}
-  m_Name: Resources
+  m_Name: Settings
   m_EditorClassIdentifier: 
   width: 10
   height: 10
@@ -19,3 +19,4 @@ MonoBehaviour:
   startingPosition: {x: 0, y: 0}
   blockerProbability: 0.1
   moveSpeed: 0.2
+  positionOffset: {x: -4.5, y: -4.5}

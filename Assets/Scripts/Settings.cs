@@ -14,4 +14,5 @@ public class Settings : ScriptableObject
 	public Vector2 startingPosition;
 	public float blockerProbability = 0.1f;
 	public float moveSpeed = 0.05f;
+	public Vector2 positionOffset = new Vector2(-4.5f, -4.5f);
 }
