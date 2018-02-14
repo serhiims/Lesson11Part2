@@ -18,5 +18,4 @@ MonoBehaviour:
   blockerPrefabResourceName: PieceBlocker
   startingPosition: {x: 0, y: 0}
   blockerProbability: 0.1
-  maxSpeed: 0
-  moveSpeed: 0.05
+  moveSpeed: 0.2
